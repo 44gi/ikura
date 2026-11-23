@@ -29,7 +29,7 @@
     const loading = document.getElementById("loading");
     const progress = document.getElementById("progress");
     const loader = document.createElement("script");
-    loader.src = "d3a2f711df4bd9e56bd9346d43969d1a.loader.js";
+    loader.src = "1c3dc6cf33e847215e7f6ada0945ed21.loader.js";
     function showFailure(error) {
       console.error(error);
       progress.hidden = true;
@@ -39,9 +39,9 @@
     loader.onload = () => {
       if (!window.createUnityInstance) { showFailure("Unity loader unavailable"); return; }
       createUnityInstance(canvas, {
-        dataUrl: "04600721356fc80ecc51ac92c2ca76d8.data.unityweb",
+        dataUrl: "9661a4b893b4f3f6dc055a188d876a14.data.unityweb",
         frameworkUrl: "e40259740d6d54eee4b1b9a4cd8e190b.framework.js.unityweb",
-        codeUrl: "8c3c6d724f82bb9ca266490fc1fb3797.wasm.unityweb",
+        codeUrl: "b4027069583c661079910b8d388622e3.wasm.unityweb",
         companyName: "DefaultCompany",
         productName: "Ikura",
         productVersion: "1.0",
