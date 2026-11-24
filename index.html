@@ -29,7 +29,7 @@
     const loading = document.getElementById("loading");
     const progress = document.getElementById("progress");
     const loader = document.createElement("script");
-    loader.src = "639da111df81ce716adb3adf5b8ea857.loader.js";
+    loader.src = "65a3aaa30a2d9f2220e57cee5176185f.loader.js";
     function showFailure(error) {
       console.error(error);
       progress.hidden = true;
@@ -39,14 +39,22 @@
     loader.onload = () => {
       if (!window.createUnityInstance) { showFailure("Unity loader unavailable"); return; }
       createUnityInstance(canvas, {
-        dataUrl: "9434114c7cac5a6f753bde96db3f5f71.data.unityweb",
+        dataUrl: "cbddb5ae8ab718190e272d8049dec442.data.unityweb",
         frameworkUrl: "e40259740d6d54eee4b1b9a4cd8e190b.framework.js.unityweb",
-        codeUrl: "4b55ba1c226f67de0f38faaad3c733eb.wasm.unityweb",
+        codeUrl: "74eed54d1950a360db74292d34643db5.wasm.unityweb",
         companyName: "DefaultCompany",
         productName: "Ikura",
         productVersion: "1.0",
         devicePixelRatio: Math.min(window.devicePixelRatio || 1, 1.25)
-      }, value => { progress.value = value; }).then(() => {
+      }, value => { progress.value = value; }).then(instance => {
+        const updateGameFocus = () => {
+          const active = document.visibilityState === "visible" && document.hasFocus();
+          instance.SendMessage("Ikura Game", "SetBrowserActive", active ? 1 : 0);
+        };
+        window.addEventListener("blur", () => instance.SendMessage("Ikura Game", "SetBrowserActive", 0));
+        window.addEventListener("focus", updateGameFocus);
+        document.addEventListener("visibilitychange", updateGameFocus);
+        updateGameFocus();
         loading.hidden = true;
         canvas.focus({preventScroll: true});
       }).catch(showFailure);
