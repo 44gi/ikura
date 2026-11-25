@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#17243e">
-  <title>サーモンクリッカー</title>
+  <title>Salmon Clicker</title>
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; width: 100%; height: 100%; }
@@ -17,19 +17,20 @@
   </style>
 </head>
 <body>
-  <main aria-label="いくら丼">
-    <canvas id="unity-canvas" width="1280" height="720" tabindex="0" aria-label="いくら丼のゲーム画面"></canvas>
+  <main aria-label="Salmon Clicker">
+    <canvas id="unity-canvas" width="1280" height="720" tabindex="0" aria-label="Salmon Clickerのゲーム画面"></canvas>
     <div id="loading" role="status">
-      <span id="status">サーモンクリッカーを読み込み中</span>
+      <span id="status">Salmon Clickerを読み込み中</span>
       <progress id="progress" max="1" value="0" aria-label="読み込みの進み具合"></progress>
     </div>
   </main>
   <script>
     const canvas = document.getElementById("unity-canvas");
+    const gameTitle = "Salmon Clicker";
     const loading = document.getElementById("loading");
     const progress = document.getElementById("progress");
     const loader = document.createElement("script");
-    loader.src = "5932f7c3fa9d12edb12e529ca5a5ebef.loader.js";
+    loader.src = "7b27478a3d42ff322c96b5f52d8ffdd6.loader.js";
     function showFailure(error) {
       console.error(error);
       progress.hidden = true;
@@ -39,19 +40,19 @@
     loader.onload = () => {
       if (!window.createUnityInstance) { showFailure("Unity loader unavailable"); return; }
       createUnityInstance(canvas, {
-        dataUrl: "5d0968282c79918693a1f4e1a5b95581.data.unityweb",
+        dataUrl: "3eb2fc83cf1446acc0948571ff4caf30.data.unityweb",
         frameworkUrl: "e40259740d6d54eee4b1b9a4cd8e190b.framework.js.unityweb",
-        codeUrl: "b63a84a862d11374886b841e61bbdebf.wasm.unityweb",
+        codeUrl: "164c8542efc8ee848f1be7a9ef78cf7f.wasm.unityweb",
         companyName: "DefaultCompany",
-        productName: "Ikura",
+        productName: gameTitle,
         productVersion: "1.0",
         devicePixelRatio: Math.min(window.devicePixelRatio || 1, 1.25)
       }, value => { progress.value = value; }).then(instance => {
         const updateGameFocus = () => {
           const active = document.visibilityState === "visible" && document.hasFocus();
-          instance.SendMessage("Ikura Game", "SetBrowserActive", active ? 1 : 0);
+          instance.SendMessage(gameTitle, "SetBrowserActive", active ? 1 : 0);
         };
-        window.addEventListener("blur", () => instance.SendMessage("Ikura Game", "SetBrowserActive", 0));
+        window.addEventListener("blur", () => instance.SendMessage(gameTitle, "SetBrowserActive", 0));
         window.addEventListener("focus", updateGameFocus);
         document.addEventListener("visibilitychange", updateGameFocus);
         updateGameFocus();
