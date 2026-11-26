@@ -30,7 +30,7 @@
     const loading = document.getElementById("loading");
     const progress = document.getElementById("progress");
     const loader = document.createElement("script");
-    loader.src = "7b27478a3d42ff322c96b5f52d8ffdd6.loader.js";
+    loader.src = "22d5ed8abcb92397c3059d5f18d4cec3.loader.js";
     function showFailure(error) {
       console.error(error);
       progress.hidden = true;
@@ -40,9 +40,9 @@
     loader.onload = () => {
       if (!window.createUnityInstance) { showFailure("Unity loader unavailable"); return; }
       createUnityInstance(canvas, {
-        dataUrl: "3eb2fc83cf1446acc0948571ff4caf30.data.unityweb",
+        dataUrl: "d62c902a93ac814b442914de297a35a8.data.unityweb",
         frameworkUrl: "e40259740d6d54eee4b1b9a4cd8e190b.framework.js.unityweb",
-        codeUrl: "164c8542efc8ee848f1be7a9ef78cf7f.wasm.unityweb",
+        codeUrl: "fe29bbdef4ba83532ec33e6113eed060.wasm.unityweb",
         companyName: "DefaultCompany",
         productName: gameTitle,
         productVersion: "1.0",
