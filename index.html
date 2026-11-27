@@ -29,20 +29,34 @@
     const gameTitle = "Salmon Clicker";
     const loading = document.getElementById("loading");
     const progress = document.getElementById("progress");
+    let pageLanguage = 'ja';
+    window.setSalmonPageLanguage = language => {
+      pageLanguage = language;
+      document.documentElement.lang = language;
+      const en = language === 'en';
+      canvas.setAttribute("aria-label", en ? gameTitle + " game" : gameTitle + "のゲーム画面");
+      progress.setAttribute("aria-label", en ? "Loading progress" : "読み込みの進み具合");
+      document.getElementById("status").textContent = en ? "Loading " + gameTitle : gameTitle + "を読み込み中";
+      try { localStorage.setItem("salmon.pageLanguage", language); } catch {}
+    };
+    try {
+      if (localStorage.getItem("salmon.pageLanguage") === "en") window.setSalmonPageLanguage("en");
+    } catch {}
     const loader = document.createElement("script");
-    loader.src = "1f6767262f9dfc99bf16b5241aeb1189.loader.js";
+    loader.src = "14eb61b375bd06dbedc329932afa2e02.loader.js";
     function showFailure(error) {
       console.error(error);
       progress.hidden = true;
-      document.getElementById("status").textContent = "読み込めませんでした。ページを再読み込みしてください。";
+      document.getElementById("status").textContent = pageLanguage === "en" ? "Could not load the game. Please reload the page." : "読み込めませんでした。ページを再読み込みしてください。";
     }
     loader.onerror = showFailure;
     loader.onload = () => {
       if (!window.createUnityInstance) { showFailure("Unity loader unavailable"); return; }
       createUnityInstance(canvas, {
-        dataUrl: "82655c23fcc92a10dc14d0df274316e0.data.unityweb",
-        frameworkUrl: "7a88a6ab9c5ba30bf8edea64c2a38d58.framework.js.unityweb",
-        codeUrl: "10b3ba1c3272bb75b5d4c3e724fd145e.wasm.unityweb",
+        dataUrl: "bdc717325979295366b1d8c3c82d0b0b.data.unityweb",
+        frameworkUrl: "c5d44e694a7a4bb30871abb29f58e2c7.framework.js.unityweb",
+        codeUrl: "9d3b02c0d63626455af87c1899ed64c7.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: gameTitle,
         productVersion: "1.0",
