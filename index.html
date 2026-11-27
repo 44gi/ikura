@@ -43,7 +43,7 @@
       if (localStorage.getItem("salmon.pageLanguage") === "en") window.setSalmonPageLanguage("en");
     } catch {}
     const loader = document.createElement("script");
-    loader.src = "14eb61b375bd06dbedc329932afa2e02.loader.js";
+    loader.src = "ccd25895ade446449f0f579e66248809.loader.js";
     function showFailure(error) {
       console.error(error);
       progress.hidden = true;
@@ -53,9 +53,9 @@
     loader.onload = () => {
       if (!window.createUnityInstance) { showFailure("Unity loader unavailable"); return; }
       createUnityInstance(canvas, {
-        dataUrl: "bdc717325979295366b1d8c3c82d0b0b.data.unityweb",
+        dataUrl: "119544ea382ecedbdaacfaa9ed6aa8ec.data.unityweb",
         frameworkUrl: "c5d44e694a7a4bb30871abb29f58e2c7.framework.js.unityweb",
-        codeUrl: "9d3b02c0d63626455af87c1899ed64c7.wasm.unityweb",
+        codeUrl: "6cc82b58c71d4e63d9763bf7a64d45f6.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: gameTitle,
