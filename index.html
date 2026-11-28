@@ -29,21 +29,27 @@
     const gameTitle = "Salmon Clicker";
     const loading = document.getElementById("loading");
     const progress = document.getElementById("progress");
-    let pageLanguage = 'ja';
-    window.setSalmonPageLanguage = language => {
+    const browserLanguage = navigator.languages?.[0] || navigator.language || "en";
+    let pageLanguage = /^ja(?:-|$)/i.test(browserLanguage) ? "ja" : "en";
+    try {
+      const saved = localStorage.getItem("salmon.pageLanguage");
+      if (saved === "ja" || saved === "en") pageLanguage = saved;
+    } catch {}
+    function applyPageLanguage(language) {
       pageLanguage = language;
       document.documentElement.lang = language;
       const en = language === 'en';
       canvas.setAttribute("aria-label", en ? gameTitle + " game" : gameTitle + "のゲーム画面");
       progress.setAttribute("aria-label", en ? "Loading progress" : "読み込みの進み具合");
       document.getElementById("status").textContent = en ? "Loading " + gameTitle : gameTitle + "を読み込み中";
+    }
+    applyPageLanguage(pageLanguage);
+    window.setSalmonPageLanguage = language => {
+      applyPageLanguage(language);
       try { localStorage.setItem("salmon.pageLanguage", language); } catch {}
     };
-    try {
-      if (localStorage.getItem("salmon.pageLanguage") === "en") window.setSalmonPageLanguage("en");
-    } catch {}
     const loader = document.createElement("script");
-    loader.src = "ccd25895ade446449f0f579e66248809.loader.js";
+    loader.src = "964839890e68bc8112fb8e9be6fd9473.loader.js";
     function showFailure(error) {
       console.error(error);
       progress.hidden = true;
@@ -53,9 +59,9 @@
     loader.onload = () => {
       if (!window.createUnityInstance) { showFailure("Unity loader unavailable"); return; }
       createUnityInstance(canvas, {
-        dataUrl: "84ddbd8553fe7aa8e0946d939734e31a.data.unityweb",
-        frameworkUrl: "c5d44e694a7a4bb30871abb29f58e2c7.framework.js.unityweb",
-        codeUrl: "246d96938e0de9ed6426f5c8203c5934.wasm.unityweb",
+        dataUrl: "b7499e29d269e1253879f8e1c8a0a3e0.data.unityweb",
+        frameworkUrl: "6f470376237c53607cac85a4747e8b49.framework.js.unityweb",
+        codeUrl: "9683673f273849ed66d49266f7629b46.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: gameTitle,
